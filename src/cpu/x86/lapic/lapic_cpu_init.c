@@ -165,7 +165,7 @@ static int lapic_start_cpu(unsigned long apicid)
 
 	for (j = 1; j <= CONFIG_NUM_IPI_STARTS; j++) {
 		printk(BIOS_SPEW, "Sending STARTUP #%d to %lu.\n", j, apicid);
-		lapic_read_around(LAPIC_SPIV);
+		lapic_read(LAPIC_SPIV);
 		lapic_write(LAPIC_ESR, 0);
 		lapic_read(LAPIC_ESR);
 		printk(BIOS_SPEW, "After apic_write.\n");
@@ -205,7 +205,7 @@ static int lapic_start_cpu(unsigned long apicid)
 		 * Due to the Pentium erratum 3AP.
 		 */
 		if (maxlvt > 3) {
-			lapic_read_around(LAPIC_SPIV);
+			lapic_read(LAPIC_SPIV);
 			lapic_write(LAPIC_ESR, 0);
 		}
 		accept_status = (lapic_read(LAPIC_ESR) & 0xEF);

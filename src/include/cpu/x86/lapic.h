@@ -120,7 +120,6 @@ static inline void lapic_write_atomic(unsigned long reg, uint32_t v)
 		      : : "memory", "cc");
 }
 
-# define lapic_read_around(x) lapic_read(x)
 # define lapic_write_around(x, y) lapic_write_atomic((x), (y))
 
 void lapic_virtual_wire_mode_init(void);

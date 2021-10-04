@@ -22,14 +22,14 @@ void lapic_virtual_wire_mode_init(void)
 	 * Set Task Priority to 'accept all'.
 	 */
 	lapic_write_around(LAPIC_TASKPRI,
-		lapic_read_around(LAPIC_TASKPRI) & ~LAPIC_TPRI_MASK);
+		lapic_read(LAPIC_TASKPRI) & ~LAPIC_TPRI_MASK);
 
 	/* Put the local APIC in virtual wire mode */
 	lapic_write_around(LAPIC_SPIV,
-		(lapic_read_around(LAPIC_SPIV) & ~(LAPIC_VECTOR_MASK))
+		(lapic_read(LAPIC_SPIV) & ~(LAPIC_VECTOR_MASK))
 		| LAPIC_SPIV_ENABLE);
 	lapic_write_around(LAPIC_LVT0,
-		(lapic_read_around(LAPIC_LVT0) &
+		(lapic_read(LAPIC_LVT0) &
 			~(LAPIC_LVT_MASKED | LAPIC_LVT_LEVEL_TRIGGER |
 				LAPIC_LVT_REMOTE_IRR | LAPIC_INPUT_POLARITY |
 				LAPIC_SEND_PENDING | LAPIC_LVT_RESERVED_1 |
@@ -38,7 +38,7 @@ void lapic_virtual_wire_mode_init(void)
 			LAPIC_DELIVERY_MODE_EXTINT)
 		);
 	lapic_write_around(LAPIC_LVT1,
-		(lapic_read_around(LAPIC_LVT1) &
+		(lapic_read(LAPIC_LVT1) &
 			~(LAPIC_LVT_MASKED | LAPIC_LVT_LEVEL_TRIGGER |
 				LAPIC_LVT_REMOTE_IRR | LAPIC_INPUT_POLARITY |
 				LAPIC_SEND_PENDING | LAPIC_LVT_RESERVED_1 |
